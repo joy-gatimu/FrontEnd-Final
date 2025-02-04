@@ -7,7 +7,6 @@ const PropertyForm = () => {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [ownerId, setOwnerId] = useState('');
-    const [imageUrl, setImageUrl] = useState(''); // New state for the image URL
     const [error, setError] = useState(null);
     const [properties, setProperties] = useState([]);
     const navigate = useNavigate();
@@ -31,7 +30,6 @@ const PropertyForm = () => {
             description,
             price_per_night: Number(price),
             owner_id: Number(ownerId),
-            image_url: imageUrl, // Include image URL in the property data
         };
 
         try {
@@ -42,7 +40,6 @@ const PropertyForm = () => {
                 setDescription('');
                 setPrice('');
                 setOwnerId('');
-                setImageUrl(''); // Clear image URL
                 setError(null);
                 const newProperties = await axios.get('/properties/');
                 setProperties(newProperties.data);
@@ -62,7 +59,7 @@ const PropertyForm = () => {
                 padding: '20px',
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center',  // Center the content horizontally
+                alignItems: 'center',
             }}
         >
             {/* Property Form (Normal Position) */}
@@ -74,7 +71,7 @@ const PropertyForm = () => {
                     maxWidth: '600px',
                     width: '100%',
                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                    marginBottom: '40px',  // Space between form and properties
+                    marginBottom: '40px',
                     border: '1px solid #ddd',
                 }}
             >
@@ -108,14 +105,6 @@ const PropertyForm = () => {
                         placeholder="Owner ID"
                         value={ownerId}
                         onChange={(e) => setOwnerId(e.target.value)}
-                        required
-                        style={inputStyle}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Image URL"
-                        value={imageUrl}
-                        onChange={(e) => setImageUrl(e.target.value)} // Capture the image URL
                         required
                         style={inputStyle}
                     />
