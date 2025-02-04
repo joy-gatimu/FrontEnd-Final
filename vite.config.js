@@ -6,10 +6,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/users/': 'http://127.0.0.1:5000', 
-      '/users/login/': 'http://127.0.0.1:5000', 
-      '/properties/': 'http://127.0.0.1:5000',
-      '/bookings/': 'http://127.0.0.1:5000',// Proxy all requests to the Flask server
+      '/users/': 'https://front-end-final-l24aw7oyh-joy-gatimus-projects.vercel.app/', 
+      '/users/login/': 'https://front-end-final-l24aw7oyh-joy-gatimus-projects.vercel.app/', 
+      '/properties/': 'https://front-end-final-l24aw7oyh-joy-gatimus-projects.vercel.app/',
+      '/bookings/': 'https://front-end-final-l24aw7oyh-joy-gatimus-projects.vercel.app/',// Proxy all requests to the Flask server
     },
   },
 });
