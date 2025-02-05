@@ -9,6 +9,7 @@ const BookingPage = () => {
   const [checkOutDate, setCheckOutDate] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
   const [user, setUser] = useState(null);
+  const [bookingDetails, setBookingDetails] = useState(null); // For storing booked property details
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -67,20 +68,15 @@ const BookingPage = () => {
       total_price: totalPrice,
     };
     axios.post('/bookings/', newBooking)
-  .then((response) => {
-    console.log('Booking Response:', response.data);  // Check this log
-    alert('Booking successful!');
-    navigate(`/BookedPropertyDisplay/${response.data.booking_id}`);
-
-
-  })
-  .catch((error) => {
-    console.error('Error creating booking:', error);
-    alert('Failed to create booking.');
-  });
-
-  
-  
+      .then((response) => {
+        console.log('Booking Response:', response.data);  
+        alert('Booking successful!');
+        setBookingDetails(response.data);  // Store the booking details
+      })
+      .catch((error) => {
+        console.error('Error creating booking:', error);
+        alert('Failed to create booking.');
+      });
   };
   
   return (
@@ -143,6 +139,26 @@ const BookingPage = () => {
           </button>
         </form>
       </div>
+
+      {/* Display Booked Property Below the Form */}
+      {bookingDetails && (
+        <div style={styles.bookingDetailsContainer}>
+          <h2 style={styles.heading}>Booked Property Details</h2>
+          <div>
+            <h3>{bookingDetails.property_name}</h3>
+            <p><strong>Location:</strong> {bookingDetails.property_location}</p>
+            <p><strong>Check-in Date:</strong> {bookingDetails.check_in}</p>
+            <p><strong>Check-out Date:</strong> {bookingDetails.check_out}</p>
+            <p><strong>Total Price:</strong> ${bookingDetails.total_price}</p>
+            <p><strong>Property Name:</strong> {bookingDetails.property_name}</p>
+            <img
+              src={bookingDetails.property_image || 'https://via.placeholder.com/150'}
+              alt={bookingDetails.property_name}
+              style={styles.propertyImage}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -218,6 +234,22 @@ const styles = {
     cursor: 'pointer',
     fontSize: '1rem',
     transition: 'background-color 0.3s ease',
+  },
+  bookingDetailsContainer: {
+    padding: '20px',
+    maxWidth: '600px',
+    margin: '0 auto',
+    backgroundColor: '#fff',
+    borderRadius: '8px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    marginTop: '20px',
+  },
+  propertyImage: {
+    width: '100%',
+    height: 'auto',
+    objectFit: 'cover',
+    borderRadius: '8px',
+    marginTop: '20px',
   },
 };
 

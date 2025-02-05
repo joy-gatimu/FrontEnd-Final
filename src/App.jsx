@@ -4,7 +4,6 @@ import PropertyForm from './Components/PropertyForm';
 import SignUp from './Components/signup';
 import SignIn from './Components/signin';
 import BookingPage from './Components/BookingPage';
-import BookedPropertyDisplay from './Components/ BookedPropertyDisplay';
 
 function App() {
   return (
@@ -98,21 +97,7 @@ function App() {
   >
     Bookings
   </Link>
-  <Link
-    to="/BookedPropertyDisplay"
-    style={{
-      margin: '0 15px',
-      textDecoration: 'none',
-      color: '#fff',
-      fontSize: '18px',
-      fontWeight: '500',
-      transition: 'color 0.3s',
-    }}
-    onMouseEnter={(e) => (e.target.style.color = '#FF6347')}
-    onMouseLeave={(e) => (e.target.style.color = '#fff')}
-  >
-    Booked property
-  </Link>
+ 
 </nav>
 
 
@@ -123,8 +108,7 @@ function App() {
         <Route path="/signin" element={<SignIn />} key="signin" />
         <Route path="/property" element={<PropertyForm />} /> 
         <Route path="/BookingPage" element={<BookingPage/>} key="BookingPage" />
-        <Route path="/BookedPropertyDisplay/:bookingId" element={<BookedPropertyDisplay />} />
-
+        
       </Routes>
     </Router>
   );
