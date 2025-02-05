@@ -31,23 +31,23 @@ const PropertyForm = () => {
             price_per_night: Number(price),
             owner_id: Number(ownerId),
         };
-
+    
         try {
             const response = await axios.post('/properties/', propertyData);
             if (response.status === 201) {
                 alert('Property added successfully!');
+                setProperties((prevProperties) => [...prevProperties, response.data]); // Directly add new property
                 setName('');
                 setDescription('');
                 setPrice('');
                 setOwnerId('');
                 setError(null);
-                const newProperties = await axios.get('/properties/');
-                setProperties(newProperties.data);
             }
         } catch (err) {
             setError(err.response?.data?.error || 'Property creation failed. Please try again.');
         }
     };
+    
 
     return (
         <div
@@ -162,7 +162,7 @@ const PropertyForm = () => {
                                         <h3>{property.name}</h3>
                                         <p>{property.description}</p>
                                         <p><strong>Price per Night:</strong> ${property.price_per_night}</p>
-                                        <p><strong>Owner ID:</strong> {property.owner_id}</p>
+                                        
                                         <button onClick={() => navigate("/BookingPage")}>Book Now</button>
                                     </div>
                                 </div>

@@ -146,7 +146,6 @@ const BookingPage = () => {
           <h2 style={styles.heading}>Booked Property Details</h2>
           <div>
             <h3>{bookingDetails.property_name}</h3>
-            <p><strong>Location:</strong> {bookingDetails.property_location}</p>
             <p><strong>Check-in Date:</strong> {bookingDetails.check_in}</p>
             <p><strong>Check-out Date:</strong> {bookingDetails.check_out}</p>
             <p><strong>Total Price:</strong> ${bookingDetails.total_price}</p>
